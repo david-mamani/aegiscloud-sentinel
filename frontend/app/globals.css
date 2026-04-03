@@ -1,0 +1,256 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-mono), monospace;
+  --font-heading: var(--font-brand), sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ═══════════════════════════════════════════════════
+   AegisCloud Design System — Typography-First
+   Light: Warm cream canvas  |  Dark: Deep gray
+   ═══════════════════════════════════════════════════ */
+
+/* ── LIGHT THEME (default) — Warm cream, almost white ── */
+:root {
+  --background: #f8f6f1;
+  --foreground: #1a1a1a;
+  --card: #f0ede6;
+  --card-foreground: #1a1a1a;
+  --popover: #f0ede6;
+  --popover-foreground: #1a1a1a;
+  --primary: #1a1a1a;
+  --primary-foreground: #f8f6f1;
+  --secondary: #ebe8e1;
+  --secondary-foreground: #1a1a1a;
+  --muted: #ebe8e1;
+  --muted-foreground: #888888;
+  --accent: #ebe8e1;
+  --accent-foreground: #1a1a1a;
+  --destructive: #b91c1c;
+  --border: #e0ddd6;
+  --input: #e0ddd6;
+  --ring: rgba(0, 0, 0, 0.08);
+  --chart-1: #1a1a1a;
+  --chart-2: #888888;
+  --chart-3: #aaaaaa;
+  --chart-4: #cccccc;
+  --chart-5: #e0ddd6;
+  --radius: 0.375rem;
+  --sidebar: #f8f6f1;
+  --sidebar-foreground: #888888;
+  --sidebar-primary: #1a1a1a;
+  --sidebar-primary-foreground: #f8f6f1;
+  --sidebar-accent: #f8f6f1;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #e0ddd6;
+  --sidebar-ring: rgba(0, 0, 0, 0.06);
+
+  --aegis-bg: #f8f6f1;
+  --aegis-bg-secondary: #f8f6f1;
+  --aegis-bg-card: #f0ede6;
+  --aegis-bg-card-hover: #ebe8e1;
+  --aegis-border: #e0ddd6;
+  --aegis-text: #1a1a1a;
+  --aegis-text-secondary: #888888;
+  --aegis-text-muted: #aaaaaa;
+  --aegis-green: #16a34a;
+  --aegis-green-dim: #15803d;
+  --aegis-blue: #2563eb;
+  --aegis-red: #dc2626;
+  --aegis-red-dim: #b91c1c;
+  --aegis-amber: #d97706;
+}
+
+/* ── DARK THEME — Deep gray, warm, NOT pure black ── */
+.dark {
+  --background: #1a1a1a;
+  --foreground: #fafafa;
+  --card: #222222;
+  --card-foreground: #fafafa;
+  --popover: #222222;
+  --popover-foreground: #fafafa;
+  --primary: #fafafa;
+  --primary-foreground: #1a1a1a;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #fafafa;
+  --muted: #2a2a2a;
+  --muted-foreground: #888888;
+  --accent: #2a2a2a;
+  --accent-foreground: #fafafa;
+  --destructive: #dc2626;
+  --border: #2a2a2a;
+  --input: #2a2a2a;
+  --ring: rgba(255, 255, 255, 0.08);
+  --chart-1: #fafafa;
+  --chart-2: #888888;
+  --chart-3: #555555;
+  --chart-4: #333333;
+  --chart-5: #2a2a2a;
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #888888;
+  --sidebar-primary: #fafafa;
+  --sidebar-primary-foreground: #1a1a1a;
+  --sidebar-accent: #1a1a1a;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #2a2a2a;
+  --sidebar-ring: rgba(255, 255, 255, 0.06);
+
+  --aegis-bg: #1a1a1a;
+  --aegis-bg-secondary: #1a1a1a;
+  --aegis-bg-card: #222222;
+  --aegis-bg-card-hover: #2a2a2a;
+  --aegis-border: #2a2a2a;
+  --aegis-text: #fafafa;
+  --aegis-text-secondary: #888888;
+  --aegis-text-muted: #555555;
+  --aegis-green: #4ade80;
+  --aegis-green-dim: #22c55e;
+  --aegis-blue: #93c5fd;
+  --aegis-red: #fca5a5;
+  --aegis-red-dim: #f87171;
+  --aegis-amber: #fcd34d;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    outline-color: transparent;
+  }
+  *:focus-visible {
+    outline-color: var(--ring);
+  }
+  html {
+    @apply font-sans;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  /* Kill any blue glow leaked from shadcn sidebar-primary */
+  html, body, #__next, main, aside {
+    --sidebar-primary: var(--foreground);
+    --sidebar-ring: transparent;
+  }
+}
+
+/* Hide the tw-animate-css border shadow overlay that causes blue viewport glow */
+#preact-border-shadow-host {
+  display: none !important;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* ── Card — flat, minimal ── */
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+/* ── Status Indicators — tiny, matte ── */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.status-dot-active {
+  background: var(--aegis-green);
+}
+.status-dot-warning {
+  background: var(--aegis-amber);
+}
+.status-dot-danger {
+  background: var(--aegis-red);
+}
+
+/* ── Monospace ── */
+.font-mono-aegis {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+}
+
+/* ── Brand heading — Bebas Neue ── */
+.font-brand {
+  font-family: var(--font-brand), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Glow Effects — Step 8 Dashboard ── */
+.glow-green {
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.15), 0 0 40px rgba(74, 222, 128, 0.05);
+}
+.glow-red {
+  box-shadow: 0 0 20px rgba(252, 165, 165, 0.15), 0 0 40px rgba(252, 165, 165, 0.05);
+}
+.glow-blue {
+  box-shadow: 0 0 20px rgba(147, 197, 253, 0.15), 0 0 40px rgba(147, 197, 253, 0.05);
+}

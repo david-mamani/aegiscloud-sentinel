@@ -1,0 +1,58 @@
+{
+  "scenarios": [
+    {
+      "id": "open-port-22",
+      "name": "SSH Port Open to Internet",
+      "description": "Security Group sg-0a1b2c3d has port 22 open to 0.0.0.0/0",
+      "severity": "CRITICAL",
+      "cis_benchmark": "CIS AWS 5.2",
+      "target_resource": "sg-0a1b2c3d4e5f6g7h8",
+      "target_rule": "sgr-ingress-22",
+      "remediation": {
+        "action": "revoke_security_group_ingress",
+        "rar_type": "urn:aegiscloud:remediation:v1:security-group-update",
+        "description": "Remove SSH (port 22) ingress rule that allows 0.0.0.0/0"
+      }
+    },
+    {
+      "id": "public-s3",
+      "name": "S3 Bucket Publicly Accessible",
+      "description": "Bucket aegis-company-data-2026 has public access enabled",
+      "severity": "HIGH",
+      "cis_benchmark": "CIS AWS 2.1.1",
+      "target_resource": "aegis-company-data-2026",
+      "remediation": {
+        "action": "put_public_access_block",
+        "rar_type": "urn:aegiscloud:remediation:v1:s3-policy-update",
+        "description": "Enable all public access block settings on the S3 bucket"
+      }
+    },
+    {
+      "id": "db-exposed",
+      "name": "Database Port Exposed to Internet",
+      "description": "Security Group sg-9i8h7g6f has MySQL port 3306 open to 0.0.0.0/0",
+      "severity": "CRITICAL",
+      "cis_benchmark": "CIS AWS 5.3",
+      "target_resource": "sg-9i8h7g6f5e4d3c2b1",
+      "target_rule": "sgr-ingress-3306-public",
+      "remediation": {
+        "action": "revoke_security_group_ingress",
+        "rar_type": "urn:aegiscloud:remediation:v1:security-group-update",
+        "description": "Remove MySQL (port 3306) ingress rule that allows 0.0.0.0/0"
+      }
+    },
+    {
+      "id": "iam-overpriv",
+      "name": "IAM Policy with Wildcard Permissions",
+      "description": "Policy AdminWildcardAccess grants * on all resources",
+      "severity": "CRITICAL",
+      "cis_benchmark": "CIS AWS 1.16",
+      "target_resource": "policy-admin-wildcard",
+      "remediation": {
+        "action": "update_iam_policy",
+        "rar_type": "urn:aegiscloud:remediation:v1:iam-policy-update",
+        "description": "Replace wildcard (*) permissions with least-privilege scoped actions"
+      }
+    }
+  ]
+}

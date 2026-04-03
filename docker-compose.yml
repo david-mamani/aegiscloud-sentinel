@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - AUTH0_DOMAIN=${AUTH0_DOMAIN}
+      - AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
+      - AUTH0_CLIENT_SECRET=${AUTH0_CLIENT_SECRET}
+      - AUTH0_AUDIENCE=${AUTH0_AUDIENCE}
+      - AUTH0_M2M_CLIENT_ID=${AUTH0_M2M_CLIENT_ID}
+      - AUTH0_M2M_CLIENT_SECRET=${AUTH0_M2M_CLIENT_SECRET}
+      - AUTH0_USER_ID=${AUTH0_USER_ID}
+      - AUTH0_TOKEN_VAULT_CLIENT_ID=${AUTH0_TOKEN_VAULT_CLIENT_ID}
+      - AUTH0_TOKEN_VAULT_CLIENT_SECRET=${AUTH0_TOKEN_VAULT_CLIENT_SECRET}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:3000}
+      - AWS_MOCK_MODE=true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    ports:
+      - "3000:3000"
+    environment:
+      - AUTH0_SECRET=${AUTH0_SECRET}
+      - AUTH0_DOMAIN=${AUTH0_DOMAIN}
+      - AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID_FRONTEND}
+      - AUTH0_CLIENT_SECRET=${AUTH0_CLIENT_SECRET_FRONTEND}
+      - AUTH0_AUDIENCE=${AUTH0_AUDIENCE}
+      - APP_BASE_URL=${APP_BASE_URL:-http://localhost:3000}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

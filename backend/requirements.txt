@@ -1,0 +1,33 @@
+# Core Framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+
+# Auth0
+auth0-python==4.9.0
+httpx==0.28.1
+python-jose[cryptography]==3.4.0
+
+# LangGraph & AI
+langgraph==0.4.8
+langchain==0.3.18
+langchain-google-genai>=2.1.0
+langchain-core==0.3.35
+
+# Checkpointer
+langgraph-checkpoint-sqlite==2.0.6
+
+# Database
+sqlalchemy==2.0.37
+aiosqlite==0.21.0
+
+# WebSocket
+python-socketio==5.12.1
+
+# Utilities
+python-dotenv==1.0.1
+pydantic==2.10.5
+pydantic-settings==2.7.1
+
+# Dev
+pytest==8.3.4
+pytest-asyncio==0.25.3

@@ -1,0 +1,153 @@
+{
+  "metadata": {
+    "account_id": "123456789012",
+    "account_alias": "aegis-corp-production",
+    "region": "us-east-1",
+    "scan_timestamp": "2026-04-01T04:30:00Z",
+    "scanner": "AegisCloud DevSecOps Sentinel v0.1.0"
+  },
+  "security_groups": {
+    "sg-0a1b2c3d4e5f6g7h8": {
+      "id": "sg-0a1b2c3d4e5f6g7h8",
+      "name": "web-server-sg",
+      "description": "Security group for production web servers",
+      "vpc_id": "vpc-abc123def456",
+      "tags": {"Environment": "production", "Team": "platform"},
+      "ingress_rules": [
+        {
+          "rule_id": "sgr-ingress-443",
+          "protocol": "tcp",
+          "from_port": 443,
+          "to_port": 443,
+          "source": "0.0.0.0/0",
+          "description": "HTTPS from internet",
+          "compliant": true
+        },
+        {
+          "rule_id": "sgr-ingress-80",
+          "protocol": "tcp",
+          "from_port": 80,
+          "to_port": 80,
+          "source": "0.0.0.0/0",
+          "description": "HTTP from internet (redirect to HTTPS)",
+          "compliant": true
+        },
+        {
+          "rule_id": "sgr-ingress-22",
+          "protocol": "tcp",
+          "from_port": 22,
+          "to_port": 22,
+          "source": "0.0.0.0/0",
+          "description": "SSH - VULNERABILITY: Open to entire internet",
+          "compliant": false,
+          "cis_benchmark": "CIS AWS 5.2",
+          "severity": "CRITICAL",
+          "risk_score": 9.8
+        }
+      ],
+      "egress_rules": [
+        {
+          "rule_id": "sgr-egress-all",
+          "protocol": "-1",
+          "from_port": 0,
+          "to_port": 65535,
+          "destination": "0.0.0.0/0",
+          "description": "Allow all outbound",
+          "compliant": true
+        }
+      ]
+    },
+    "sg-9i8h7g6f5e4d3c2b1": {
+      "id": "sg-9i8h7g6f5e4d3c2b1",
+      "name": "database-sg",
+      "description": "Security group for RDS instances",
+      "vpc_id": "vpc-abc123def456",
+      "tags": {"Environment": "production", "Team": "data"},
+      "ingress_rules": [
+        {
+          "rule_id": "sgr-ingress-3306",
+          "protocol": "tcp",
+          "from_port": 3306,
+          "to_port": 3306,
+          "source": "sg-0a1b2c3d4e5f6g7h8",
+          "description": "MySQL from web servers",
+          "compliant": true
+        },
+        {
+          "rule_id": "sgr-ingress-3306-public",
+          "protocol": "tcp",
+          "from_port": 3306,
+          "to_port": 3306,
+          "source": "0.0.0.0/0",
+          "description": "MySQL - VULNERABILITY: Database exposed to internet",
+          "compliant": false,
+          "cis_benchmark": "CIS AWS 5.3",
+          "severity": "CRITICAL",
+          "risk_score": 10.0
+        }
+      ],
+      "egress_rules": []
+    }
+  },
+  "s3_buckets": {
+    "aegis-company-data-2026": {
+      "name": "aegis-company-data-2026",
+      "region": "us-east-1",
+      "creation_date": "2026-01-15T10:00:00Z",
+      "tags": {"Environment": "production", "Classification": "confidential"},
+      "public_access_block": {
+        "block_public_acls": false,
+        "ignore_public_acls": false,
+        "block_public_policy": false,
+        "restrict_public_buckets": false
+      },
+      "bucket_policy_public": true,
+      "encryption": {"enabled": false, "type": null},
+      "versioning": false,
+      "compliant": false,
+      "cis_benchmark": "CIS AWS 2.1.1, 2.1.2",
+      "severity": "HIGH",
+      "risk_score": 8.5
+    },
+    "aegis-logs-archive": {
+      "name": "aegis-logs-archive",
+      "region": "us-east-1",
+      "creation_date": "2025-06-01T08:00:00Z",
+      "tags": {"Environment": "production", "Classification": "internal"},
+      "public_access_block": {
+        "block_public_acls": true,
+        "ignore_public_acls": true,
+        "block_public_policy": true,
+        "restrict_public_buckets": true
+      },
+      "bucket_policy_public": false,
+      "encryption": {"enabled": true, "type": "AES256"},
+      "versioning": true,
+      "compliant": true,
+      "severity": "NONE",
+      "risk_score": 0.0
+    }
+  },
+  "iam_policies": {
+    "policy-admin-wildcard": {
+      "arn": "arn:aws:iam::123456789012:policy/AdminWildcardAccess",
+      "name": "AdminWildcardAccess",
+      "description": "VULNERABILITY: Policy with * on all resources",
+      "attached_to": ["role/lambda-processor-role"],
+      "policy_document": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+          }
+        ]
+      },
+      "compliant": false,
+      "cis_benchmark": "CIS AWS 1.16",
+      "severity": "CRITICAL",
+      "risk_score": 9.5
+    }
+  }
+}

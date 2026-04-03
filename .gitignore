@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+*.db
+*.db-shm
+*.db-wal
+
+# Node
+node_modules/
+.next/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+
+# Development artifacts — NEVER push docs/ (contains internal notes with potential secrets)
+.gemini/
+.agents/
+docs/
+backend/scripts/*results*
+backend/scripts/*output*

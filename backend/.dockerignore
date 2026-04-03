@@ -1,0 +1,8 @@
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+venv
+.env
+aegiscloud_checkpoints.db
+.git
