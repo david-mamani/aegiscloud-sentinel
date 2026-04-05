@@ -247,7 +247,7 @@ export default function SettingsPage() {
                 </p>
                 {exchangeResult.steps.map((step, i) => (
                   <motion.div
-                    key={step.step}
+                    key={`step-${i}-${step.step}`}
                     className="flex items-start gap-3 py-1.5"
                     initial={{ opacity: 0, x: -8 }}
                     animate={{

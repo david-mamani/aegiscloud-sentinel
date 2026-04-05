@@ -33,5 +33,11 @@ build/
 .gemini/
 .agents/
 docs/
-backend/scripts/*results*
-backend/scripts/*output*
+backend/scripts/
+*.results*
+*results*.txt
+*output*.txt
+*vault*.txt
+backend/check_vault.py
+backend/vault_*
+test_results.txt

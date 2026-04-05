@@ -32,7 +32,10 @@ export async function GET(req: NextRequest) {
       const resp = await fetch(`${BACKEND}/api/v1/auth/connections`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const data = await resp.json();
+      if (!resp.ok) {
+        console.error(`[token-proxy] connections failed: ${resp.status} ${await resp.text().catch(() => '')}`);
+      }
+      const data = await resp.json().catch(() => ({ connections: [], error: `Backend returned ${resp.status}` }));
       return NextResponse.json(data);
     }
 
